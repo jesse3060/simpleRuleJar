@@ -5,7 +5,7 @@ This project serves as an example project for defining new `ReportingRules` that
 ## Description
 
 The `Reporting-Proxy` addon in Zaproxy allows developers to configure ZAP with a set of rules, so that they can receive live notifications 
-when a rule matches the observed traffic. These rules can be uploaded in a jar file via the Zaproxy gui. See (LINK TO CHAPTER) on how to do this.
+when a rule matches the observed traffic. These rules can be uploaded in a jar file via the Zaproxy gui. See [Uploading your Jar](#uploading-your-jar) on how to do this.
 
 This project can be forked to easily get started on defining your own `ReportingRules`. Further below, there are more examples and documentation if you want to create your own project from scratch. 
 
@@ -15,7 +15,7 @@ This project can be forked to easily get started on defining your own `Reporting
 To get started defining new rules, you need two dependencies in your project
 
 * Zaproxy (to use the [HttpMessage type](https://javadoc.io/doc/org.zaproxy/zap/2.9.0/org/parosproxy/paros/network/HttpMessage.html))
-* `Reporting-Proxy` api, defined in a jar (see sources).
+* `Reporting-Proxy` api, defined in a jar (see [releases](https://github.com/jesse3060/simpleRuleJar/releases/tag/v1.0.0)).
 
 Concretely, you need to add the follow two dependencies to the `build.gradle.kts` file:
 ```gradle
