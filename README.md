@@ -27,20 +27,20 @@ dependencies {
 
 ### Defining new Rules
 
-A valid `ReportingRule` always needs to implement the `ReportingRule` interface which consits of one `handleMessage` method. This method returns a `ReportingRuleResult` instance, which can either be a `ReportingRuleSucces` or `ReportingRuleFailure` 
+A valid `ReportingRule` always needs to implement the `ReportingRule` interface which consits of a `handleMessage` and `getDisplayName` method. The first method returns a `ReportingRuleResult` instance, which can either be a `ReportingRuleSucces` or `ReportingRuleFailure`. The second method is used in the UI to correctly display the name of a rule when a rule returns a failure.
 
 *Example:*
 ```Java
-package org.simplerules;
-import org.zaproxy.addon.reportingproxy.api.ReportingRule;
-import org.zaproxy.addon.reportingproxy.api.ReportingRuleResult;
-import org.zaproxy.addon.reportingproxy.api.ReportingRuleSuccess;
-
 public class AlwaysPostiveRule implements ReportingRule {
 
     @Override
-    public ReportingRuleResult handleHttpMessage(org.parosproxy.paros.network.HttpMessage msg) {
+    public ReportingRuleResult handleHttpMessage(org.parosproxy.paros.network.HttpMessage msg, boolean isSendRequest) {
         return new ReportingRuleSuccess(this);
+    }
+
+    @Override
+    public String getRuleDisplayName() {
+        return "Always Positive";
     }
 }
 ```
@@ -49,20 +49,16 @@ A `ReportingRuleSucces` only holds a reference to the rule that triggered it. A 
 the `HttpMessage` that triggered it, a description message and a list of all relevant `HttpMessages`.
 *Example:* 
 ```Java
-package org.simplerules;
-
-import org.parosproxy.paros.network.HttpMessage;
-import org.zaproxy.addon.reportingproxy.api.ReportingRule;
-import org.zaproxy.addon.reportingproxy.api.ReportingRuleFailure;
-import org.zaproxy.addon.reportingproxy.api.ReportingRuleResult;
-
-import java.util.List;
-
 public class AlwaysNegativeRule implements ReportingRule {
 
     @Override
-    public ReportingRuleResult handleHttpMessage(HttpMessage msg) {
+    public ReportingRuleResult handleHttpMessage(HttpMessage msg, boolean isSendRequest) {
         return new ReportingRuleFailure(this, msg, List.of(msg), "I always trigger!");
+    }
+
+    @Override
+    public String getRuleDisplayName() {
+        return "Always Negative";
     }
 }
 ```
