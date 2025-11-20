@@ -1,13 +1,13 @@
-# Simple Rules Jar
+# Reporting Proxy Api
 
-This project serves as an example project for defining new `ReportingRules` that can be uploaded in the `Reporting-Proxy` addon for [Zaproxy](https://www.zaproxy.org/)
+This document is an introduction for developers who want to define and upload their own rules. An example project which also contains this file can be foundin this repository.
 
 ## Description
 
-The `Reporting-Proxy` addon in Zaproxy allows developers to configure ZAP with a set of rules, so that they can receive live notifications 
+The `Reporting-Proxy` addon in [Zaproxy](https://www.zaproxy.org/) allows developers to configure ZAP with a set of rules, so that they can receive live notifications
 when a rule matches the observed traffic. These rules can be uploaded in a jar file via the Zaproxy gui. See [Uploading your Jar](#uploading-your-jar) on how to do this.
 
-This project can be forked to easily get started on defining your own `ReportingRules`. Further below, there are more examples and documentation if you want to create your own project from scratch. 
+This project can be forked to easily get started on defining your own `ReportingRules`. Further below, there are more examples and documentation if you want to create your own project from scratch.
 
 ## Getting Started
 
@@ -15,7 +15,7 @@ This project can be forked to easily get started on defining your own `Reporting
 To get started defining new rules, you need two dependencies in your project
 
 * Zaproxy (to use the [HttpMessage type](https://javadoc.io/doc/org.zaproxy/zap/2.9.0/org/parosproxy/paros/network/HttpMessage.html))
-* `Reporting-Proxy` api, defined in a jar (see [releases](https://github.com/jesse3060/simpleRuleJar/releases/tag/v1.0.0)).
+* `Reporting-Proxy` api, defined in a jar (see [releases](https://github.com/jesse3060/simpleRuleJar/releases/tag/v2.0.0)).
 
 Concretely, you need to add the follow two dependencies to the `build.gradle.kts` file:
 ```gradle
@@ -45,9 +45,9 @@ public class AlwaysPostiveRule implements ReportingRule {
 }
 ```
 
-A `ReportingRuleSucces` only holds a reference to the rule that triggered it. A `ReportingRuleFailure` however can contain more info about the rule that was triggered. It always contains the rule that was triggered, 
+A `ReportingRuleSucces` only holds a reference to the rule that triggered it. A `ReportingRuleFailure` however can contain more info about the rule that was triggered. It always contains the rule that was triggered,
 the `HttpMessage` that triggered it, a description message and a list of all relevant `HttpMessages`.
-*Example:* 
+*Example:*
 ```Java
 public class AlwaysNegativeRule implements ReportingRule {
 
@@ -76,8 +76,10 @@ After you have implemented new rules, build your jar using Gradle
 
 ### Uploading your jar
 
-TODO SHOW PICTURES ON HOW TO UPLOAD JAR
-
+**1. Press the green '+' button next to 'Response'**
+![step1](./img/upload_jar_tutorial_1.png)
+**2. Select the jar you want to upload in 'Choose JAR file...'**
+![step2](./img/upload_jar_tutorial_2.png)
 ## Help
 
 If you encounter any issues or if you have any feedback, please contact us.
